@@ -3,7 +3,9 @@
   "version": "3.0.0",
   "description": "A project bootstrap for Eleventy sites. With pipelines for Less, and serverless functions",
   "contributors": "Phil Hawksworth",
-  "author": "Jim Lundblad",
+  "author": {
+    "name": "Jim Lundblad",
+  },
   "license": "MIT",
   "scripts": {
     "start": "npm run dev:site",
