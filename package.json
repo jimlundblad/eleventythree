@@ -4,7 +4,7 @@
   "description": "A project bootstrap for Eleventy sites. With pipelines for Less, and serverless functions",
   "contributors": "Phil Hawksworth",
   "author": {
-    "name": "Jim Lundblad",
+    "name": "Jim Lundblad"
   },
   "license": "MIT",
   "scripts": {
