@@ -12,13 +12,13 @@ const desc = require('../../../package.json').description
 const comment = `/* ${desc} */`
 
 
-const sourceContent = [
-  '../**/*.njk',
-  '../_includes/**/*.html',
-  '../_includes/**/*.md',
-  '../_includes/*.md',
-  '../_includes/*.njk'
-];
+// const sourceContent = [
+//   '../**/*.njk',
+//   '../_includes/**/*.html',
+//   '../_includes/**/*.md',
+//   '../_includes/*.md',
+//   '../_includes/*.njk'
+// ];
 
 
 const fileName = "styles.css";
@@ -38,11 +38,11 @@ module.exports = class {
 
   async render ({ rawCss, rawFilepath }) {
     return await postcss([
-      purgeCSS({
-        content: sourceContent,
-        variables: true,
-        keyframes: true
-      }), // remove css markup not in the templates
+      // purgeCSS({
+      //   content: sourceContent,
+      //   variables: true,
+      //   keyframes: true
+      // }), // remove css markup not in the templates
       require('autoprefixer'), //prefix for older browsers
       require('cssnano') //minify the css
     ])
