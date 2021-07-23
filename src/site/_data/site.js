@@ -1,4 +1,4 @@
 module.exports = {
-  "rootUrl" : "https://site-root-url.com",
+  "rootUrl" : process.env.URL || require('../../../package.json').author.url,
   "buildTime" : new Date()
 }

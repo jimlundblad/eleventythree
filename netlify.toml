@@ -1,14 +1,41 @@
 [build]
-  command = "npm run build"
-  publish = "dist"
+  command = "yarn prod"
+  publish = "_site"
   functions = "src/functions"
-  NODE_ENV = "10.15.3"
+  NODE_ENV = "15.14.0"
 
 [dev]
-  command = "npm run start"
+  command = "yarn start"
 
+[[plugins]]
+  # Checking page speed 
+  package = "@netlify/plugin-lighthouse"
+
+[[plugins]]
+  # inlining above the fold css
+  package = "netlify-plugin-inline-critical-css"
+
+  [plugins.inputs]
+    fileFilter = ["*.html"]
+
+    # A filter used to target or ignore specific directories in the publish directory. This option is passed onto the readdirp library, see https://github.com/paulmillr/readdirp#options for more info.
+    directoryFilter = ["!node_modules"]
+
+    # You can refer to `critical`’s documentation: https://github.com/addyosmani/critical for all options below.
+    # Whether to minify the generated critical-path CSS.
+    minify = true
+
+    # Whether to remove the inlined styles from any stylesheet referenced in the HTML. Use with caution. Removing the critical CSS per page results in a unique async loaded CSS file for every page, meaning you can’t rely on cache across multiple pages.
+    extract = false
+
+    # An array of objects containing `width` and `height` properties to deliver critical CSS for multiple screen resolutions.
+    dimensions = [
+      { width = 414, height = 896 },
+      { width = 1920, height = 1080 }
+    ]
 
 [[redirects]]
+  # Will host the api calls to themoviedb API
   from = "/api/*"
   to = "/.netlify/functions/:splat"
   status = 200

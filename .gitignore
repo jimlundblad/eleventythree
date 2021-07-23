@@ -1,15 +1,13 @@
-# dependencies installed by npm
-/node_modules
+_site/
+node_modules/
+package-lock.json
 
-# build artefacts
-/dist
-/src/site/_includes/css
+# Local Netlify folder
+.netlify
 
-# secrets and errors
+# Env variables
 .env
-/yarn-error.log
+!.dist
 
-# macOS related files
-.DS_Store
-.AppleDouble
-.LSOverride
+# webpack outputs hashed chunks here
+src/site/scripts/

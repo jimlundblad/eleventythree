@@ -3,8 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/styles.css">
-    <title>{{ title }}</title>
+
+    {# defer non critical css  #}
+    <link rel="preload" href="/css/styles.css?v={{cacheBust.hash}}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/styles.css?v={{cacheBust.hash}}"></noscript>
+    
+    <script async src="/assets/main.js?v={{cacheBust.hash}}"></script>
+    <title>{{ title }}{% if page.url != '/' %} | {{ meta.siteName }}{% endif %}</title>
   </head>
   <body {% if bodyClass %}class="{{ bodyClass }}"{% endif %}>
 
@@ -14,14 +19,5 @@
       {% include "footer.njk" %}
     </div>
 
-    {% set js %}
-      {% include "js/core.js" %}
-      {% include "js/hello.js" %}
-    {% endset %}
-    <script>{{ js | jsmin | safe }}</script>
-
   </body>
 </html>
-
-
-

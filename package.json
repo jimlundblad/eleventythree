@@ -1,40 +1,47 @@
 {
-  "name": "EleventyOne",
+  "name": "EleventyTwo",
   "version": "3.0.0",
-  "description": "A project bootstrap for Eleventy sites. With pipelines for PostCSS, JavaScript, and serverless functions",
-  "author": "Phil Hawksworth",
+  "description": "A project bootstrap for Eleventy sites. With pipelines for Less, and serverless functions",
+  "contributors": "Phil Hawksworth",
+  "author": "Jim Lundblad",
   "license": "MIT",
   "scripts": {
-    "start": "npm run dev",
-    "dev": "cross-env ELEVENTY_ENV=dev eleventy --serve",
-    "build": "cross-env ELEVENTY_ENV=prod eleventy",
-    "seed": "cross-env ELEVENTY_ENV=seed eleventy"
+    "start": "npm run dev:site",
+    "del:dist": "rimraf ./_site",
+    "dev": "npm-run-all --parallel  dev:assets & npm run dev:site",
+    "build": "npm-run-all --parallel dev:assets dev:site",
+    "build:assets": "webpack --config webpack.config.prod.js",
+    "build:site": "ELEVENTY_ENV=production npx eleventy",
+    "dev:assets": "webpack --config webpack.config.dev.js",
+    "dev:site": "ELEVENTY_ENV=development npx eleventy --serve",
+    "prod": "npm-run-all del:dist build:assets build:site"
   },
   "repository": {
-    "type": "git",
-    "url": "https://github.com/philhawksworth/eleventyone"
+    "type": "rad",
+    "url": "rad:git:hnrkruw17zaygmn9zfeg1rayqwjsj77exjwry"
   },
-  "dependencies": {
-    "@11ty/eleventy": "^0.8.3",
-    "@11ty/eleventy-plugin-syntaxhighlight": "^2.0.3",
-    "autoprefixer": "^9.6.0",
+  "dependencies": {},
+  "devDependencies": {
+    "@11ty/eleventy": "^0.12.1",
+    "@fullhuman/postcss-purgecss": "^4.0.3",
+    "autoprefixer": "^10.3.1",
     "axios": "^0.21.1",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
     "cssnano": "^4.1.10",
     "dotenv": "^8.0.0",
+    "eleventy-critical-css": "^1.0.0",
     "html-minifier": "^4.0.0",
-    "luxon": "^1.16.0",
+    "less": "^4.1.1",
+    "md5-file": "^5.0.0",
+    "netlify-cli": "~5.2.2",
     "node-fetch": "^2.6.1",
-    "postcss": "^7.0.17",
-    "postcss-color-mix": "^1.1.0",
-    "postcss-comment": "^2.0.0",
-    "postcss-import": "^12.0.1",
-    "postcss-mixins": "^6.2.1",
-    "postcss-simple-vars": "^5.0.2",
-    "precss": "^4.0.0",
-    "uglify-js": "^3.6.0",
-    "xml2js": "^0.4.19"
-  },
-  "devDependencies": {
-    "cross-env": "5.2.0"
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.3.6",
+    "postcss-less": "^4.0.1",
+    "rimraf": "^3.0.2",
+    "terser-webpack-plugin": "^5.1.4",
+    "webpack": "^5.46.0",
+    "webpack-cli": "^4.7.2",
+    "webpack-merge": "^5.8.0"
   }
 }
